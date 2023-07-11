@@ -13,6 +13,9 @@ export default {
       fontFamily: {
         "system": ["Inter", "sans-serif"],
         "title": ['Poppins', "sans-serif"]
+      },
+      padding: {
+        "page-container": "0 176px",
       }
     },
   },
