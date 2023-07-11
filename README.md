@@ -26,7 +26,7 @@ O CineClube é uma rede social voltada para entusiastas de filmes, funcionando c
 2. Navegue até o diretório do projeto: `cd cineclube-front`
 3. Instale as dependências do frontend: `npm install` ou `yarn install`
 4. inicie o servidor frontend: `npm run dev` ou `yarn dev`
-5. Acesse o CineClube em seu navegador: `http://localhost:3000`
+5. Acesse o CineClube em seu navegador: `http://localhost:5173`
 
 ## Equipe
 
