@@ -1,11 +1,10 @@
-import { useState } from "react";
-import "./App.css";
+import LandingPage from "./pages/LandingPage";
 
 function App() {
   return (
-    <>
-      <h1>CineClub</h1>
-    </>
+    <div className="w-screen">
+      <LandingPage />
+    </div>
   );
 }
 
