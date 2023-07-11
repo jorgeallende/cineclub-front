@@ -33,8 +33,8 @@ O CineClube é uma rede social voltada para entusiastas de filmes, funcionando c
 
 ## Equipe
 
-- Jorge Allende (@jorgeallende)
-- Higor Breno (@)
+- Jorge Allende ([@jorgeallende](https://github.com/jorgeallende))
+- Higor Breno ([@higorbreno](https://github.com/higorbreno))
 - Rian Carlos ([@RianC4l0s](https://github.com/RianC4rl0s))
 - Altair Campielo (@)
 
