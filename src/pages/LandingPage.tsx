@@ -1,10 +1,10 @@
-import React from "react";
-import Header from "../components/Header";
-import HeroIllustration from "../assets/hero-illustration.svg";
-import { Navigate, useNavigate } from "react-router-dom";
+import React from 'react'
+import Header from '../components/Header'
+import HeroIllustration from '../assets/hero-illustration.svg'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 const LandingPage = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   return (
     <div className="">
@@ -39,7 +39,7 @@ const LandingPage = () => {
 
           <button
             onClick={() => {
-              navigate("/register");
+              navigate('/register')
             }}
             className="px-20 py-5 bg-system-orange self-center rounded-2xl"
           >
@@ -57,7 +57,7 @@ const LandingPage = () => {
         </div>
       </main>
     </div>
-  );
-};
+  )
+}
 
-export default LandingPage;
+export default LandingPage
