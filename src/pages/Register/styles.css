@@ -1,0 +1,13 @@
+.side-animation{
+    animation: side-animation 5s linear infinite;
+    animation-iteration-count: infinite;
+}
+
+@keyframes side-animation{
+    0%{
+        transform: translateY(0);
+    }
+    100%{
+        transform: translateY(-112px);
+    }
+}
