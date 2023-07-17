@@ -44,18 +44,21 @@ const Register = () => {
           inputCallback={setUser}
           label="Usuário"
           type="text"
+          variant="default"
         />
         <Input
           inputValue={password}
           inputCallback={setPassword}
           label="Senha"
           type="password"
+          variant="default"
         />
         <Input
           inputValue={passwordConfirmation}
           inputCallback={setPasswordConfirmation}
           label="Confirmar senha"
           type="password"
+          variant="default"
         />
         <Input
           day={day}
