@@ -14,7 +14,8 @@ export default {
       },
       fontFamily: {
         "system": ["Inter", "sans-serif"],
-        "title": ['Poppins', "sans-serif"]
+        "title": ['Poppins', "sans-serif"],
+        "logo": ['Koulen', 'cursive']
       },
       padding: {
         "page-container": "0 176px",
