@@ -3,30 +3,71 @@ import { BsFillArrowLeftCircleFill } from 'react-icons/bs'
 import './styles.css'
 import { useNavigate } from 'react-router-dom'
 import Input from '../../components/Input'
+import { z } from 'zod'
+import axios from 'axios'
 
 const Register = () => {
   const [user, setUser] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
-  const [day, setDay] = useState(null)
-  const [month, setMonth] = useState(null)
-  const [year, setYear] = useState(null)
+  const [day, setDay] = useState(-1)
+  const [month, setMonth] = useState(-1)
+  const [year, setYear] = useState(-1)
 
   const navigate = useNavigate()
 
+  const userSchema = z
+    .object({
+      user: z.string().min(3).max(20),
+      password: z.string().min(6).max(20),
+      passwordConfirmation: z.string().min(6).max(20),
+    })
+    .superRefine(({ password, passwordConfirmation }, ctx) => {
+      if (password !== passwordConfirmation) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'As senhas precisam ser iguais',
+          path: ['passwordConfirmation'],
+        })
+      }
+    })
+
+  const handleSubmit = async () => {
+    try {
+      const userValidation = userSchema.parse({
+        user,
+        password,
+        passwordConfirmation,
+      })
+
+      console.log(userValidation)
+
+      await axios
+        .post('http://localhost:8080/user', {
+          username: '@' + userValidation.user,
+          password: userValidation.password,
+          age: 12,
+          name: userValidation.user,
+          bio: 'OIEEE',
+        })
+        .then(response => {
+          console.log(response)
+        })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div className="bg-system-white flex h-screen items-center justify-center">
-      <div className="rounded-lg py-32 overflow-hidden relative bg-gradient-to-r from-system-orange to-orange-800 min-h-[70vh] w-[800px] px-44 flex flex-col gap-6 items-center">
+      <div className="rounded-lg overflow-hidden relative bg-gradient-to-r from-system-orange to-orange-800 h-[80vh] w-[800px] px-44 flex flex-col gap-4 items-center justify-center">
         <div className="absolute left-2 top-2 flex flex-col gap-3 side-animation">
-          <div className="bg-[#D9D9D9] opacity-40 h-[100px] aspect-square rounded-2xl"></div>
-          <div className="bg-[#D9D9D9] opacity-40 h-[100px] aspect-square rounded-2xl"></div>
-          <div className="bg-[#D9D9D9] opacity-40 h-[100px] aspect-square rounded-2xl"></div>
-          <div className="bg-[#D9D9D9] opacity-40 h-[100px] aspect-square rounded-2xl"></div>
-          <div className="bg-[#D9D9D9] opacity-40 h-[100px] aspect-square rounded-2xl"></div>
-          <div className="bg-[#D9D9D9] opacity-40 h-[100px] aspect-square rounded-2xl"></div>
-          <div className="bg-[#D9D9D9] opacity-40 h-[100px] aspect-square rounded-2xl"></div>
-          <div className="bg-[#D9D9D9] opacity-40 h-[100px] aspect-square rounded-2xl"></div>
-          <div className="bg-[#D9D9D9] opacity-40 h-[100px] aspect-square rounded-2xl"></div>
+          {Array.from({ length: 16 }).map((_, index) => (
+            <div
+              key={index}
+              className="bg-[#D9D9D9] opacity-40 h-[100px] aspect-square rounded-2xl"
+            ></div>
+          ))}
         </div>
 
         {/*  */}
@@ -72,11 +113,7 @@ const Register = () => {
           variant="birthday"
         />
         <button
-          onClick={() => {
-            console.log(day)
-            console.log(month)
-            console.log(year)
-          }}
+          onClick={() => void handleSubmit()}
           className="bg-system-blue px-16 py-5 mt-7 h-[54px] rounded-2xl text-white font-title font-semibold"
         >
           REGISTRAR
@@ -84,15 +121,12 @@ const Register = () => {
         {/*  */}
 
         <div className="absolute right-2 top-2 group flex flex-col gap-3 side-animation">
-          <div className="bg-[#D9D9D9] opacity-40 group-hover:opacity-60 transition-opacity duration-300 h-[100px] aspect-square rounded-2xl"></div>
-          <div className="bg-[#D9D9D9] opacity-40 group-hover:opacity-60 transition-opacity duration-300 h-[100px] aspect-square rounded-2xl"></div>
-          <div className="bg-[#D9D9D9] opacity-40 group-hover:opacity-60 transition-opacity duration-300 h-[100px] aspect-square rounded-2xl"></div>
-          <div className="bg-[#D9D9D9] opacity-40 group-hover:opacity-60 transition-opacity duration-300 h-[100px] aspect-square rounded-2xl"></div>
-          <div className="bg-[#D9D9D9] opacity-40 group-hover:opacity-60 transition-opacity duration-300 h-[100px] aspect-square rounded-2xl"></div>
-          <div className="bg-[#D9D9D9] opacity-40 group-hover:opacity-60 transition-opacity duration-300 h-[100px] aspect-square rounded-2xl"></div>
-          <div className="bg-[#D9D9D9] opacity-40 group-hover:opacity-60 transition-opacity duration-300 h-[100px] aspect-square rounded-2xl"></div>
-          <div className="bg-[#D9D9D9] opacity-40 group-hover:opacity-60 transition-opacity duration-300 h-[100px] aspect-square rounded-2xl"></div>
-          <div className="bg-[#D9D9D9] opacity-40 group-hover:opacity-60 transition-opacity duration-300 h-[100px] aspect-square rounded-2xl"></div>
+          {Array.from({ length: 16 }).map((_, index) => (
+            <div
+              key={index}
+              className="bg-[#D9D9D9] opacity-40 h-[100px] aspect-square rounded-2xl"
+            ></div>
+          ))}
         </div>
       </div>
     </div>

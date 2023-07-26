@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import LandingPage from './pages/LandingPage.tsx'
-import Register from './pages/Register/index.tsx'
-import LoginPage from './pages/Login/index.tsx'
+import LandingPage from './pages/LandingPage'
+import Register from './pages/Register'
+import LoginPage from './pages/Login'
 
 const router = createBrowserRouter([
   {

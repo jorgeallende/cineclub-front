@@ -6,22 +6,27 @@ const Input = (props: InputProps) => {
       <label className="text-white font-title text-sm font-semibold">
         {props.label}
       </label>
-      {!props.variant ||
+      {props.variant == undefined ||
         (props.variant == 'default' && (
           <input
+            onChange={e => {
+              const input = e.target as HTMLInputElement
+              if (props.variant === 'default') {
+                props.inputCallback(input.value)
+              }
+            }}
             type={props.type}
-            name=""
-            id=""
             className="h-[54px] bg-system-white-light rounded-2xl w-full text-system-black px-4 font-title font-semibold"
           />
         ))}
+
+      {/*  */}
       {props.variant === 'birthday' && (
         <div className="flex justify-between gap-8">
           <input
             placeholder="Dia"
             type={props.type}
-            name=""
-            value={props.day as number}
+            value={props.day == -1 ? '' : (props.day as number)}
             onChange={e => {
               const input = e.target as HTMLInputElement
               if (input.value.length > 2) {
@@ -35,13 +40,12 @@ const Input = (props: InputProps) => {
                 }
               }
             }}
-            id=""
             className="h-[54px] bg-system-white-light rounded-2xl w-full text-system-black px-4 font-title font-semibold"
           />
           <input
             placeholder="Mês"
             type={props.type}
-            value={props.month as number}
+            value={props.month == -1 ? '' : (props.month as number)}
             onChange={e => {
               const input = e.target as HTMLInputElement
               if (input.value.length > 2) {
@@ -55,14 +59,12 @@ const Input = (props: InputProps) => {
                 }
               }
             }}
-            name=""
-            id=""
             className="h-[54px] bg-system-white-light rounded-2xl w-full text-system-black px-4 font-title font-semibold"
           />
           <input
             placeholder="Ano"
             type={props.type}
-            value={props.year as number}
+            value={props.year == -1 ? '' : (props.year as number)}
             onChange={e => {
               const input = e.target as HTMLInputElement
               if (input.value.length > 4) {
@@ -76,8 +78,6 @@ const Input = (props: InputProps) => {
                 }
               }
             }}
-            name=""
-            id=""
             className="h-[54px] bg-system-white-light rounded-2xl w-full text-system-black px-4 font-title font-semibold"
           />
         </div>
