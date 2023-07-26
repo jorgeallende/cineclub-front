@@ -1,9 +1,36 @@
 import { useState } from 'react'
 import Input from '../../components/Input'
+import { verifyPassword } from '../../utils/auth'
+import { useNavigate } from 'react-router-dom'
 
 const LoginPage = () => {
   const [user, setUser] = useState('')
   const [password, setPassword] = useState('')
+  const [logado, setLogado] = useState(false)
+
+  const navigate = useNavigate()
+
+  async function handleLogin(username: string, password: string) {
+    try {
+      const response = {
+        username: '@altair',
+        password:
+          '$2a$12$2pZ2VkAdvB4MSDkV9tH/mugdmQTHqKru5Tz1R1oUtlI2TDR9iqsxW',
+        age: 12,
+        name: 'altair',
+        bio: 'OIEEE',
+      }
+
+      console.log(password)
+      console.log(await verifyPassword(password, response.password))
+
+      if (await verifyPassword(password, response.password)) {
+        setLogado(true)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <div className="bg-system-white flex items-center justify-center h-screen overflow-hidden relative">
@@ -34,15 +61,28 @@ const LoginPage = () => {
               label="Senha"
               inputValue={password}
               inputCallback={setPassword}
+              type="password"
             />
           </div>
-          <button className="font-title font-semibold text-xl px-12 py-3 bg-system-orange text-white self-center rounded-full">
+          {logado ? <h1>LOGOU</h1> : <>Não logou</>}
+          <button
+            onClick={() => void handleLogin(user, password)}
+            className="font-title font-semibold text-xl px-12 py-3 bg-system-orange text-white self-center rounded-full hover:bg-system-orange-light"
+          >
             Entrar
           </button>
           <div className="text-center">
-            <p>Esqueci minha senha</p>
+            <p className="underline text-blue-500 cursor-pointer">
+              Esqueci minha senha
+            </p>
             <p>
-              Não faz parte do clube? <span>Criar conta</span>
+              Não faz parte do clube?{' '}
+              <span
+                onClick={() => navigate('/register')}
+                className="underline text-blue-500 cursor-pointer"
+              >
+                Criar conta
+              </span>
             </p>
           </div>
         </div>

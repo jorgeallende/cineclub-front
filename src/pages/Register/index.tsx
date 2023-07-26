@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import Input from '../../components/Input'
 import { z } from 'zod'
 import axios from 'axios'
+import { hashPassword } from '../../utils/auth'
 
 const Register = () => {
   const [user, setUser] = useState('')
@@ -45,7 +46,7 @@ const Register = () => {
       await axios
         .post('http://localhost:8080/user', {
           username: '@' + userValidation.user,
-          password: userValidation.password,
+          password: await hashPassword(userValidation.password),
           age: 12,
           name: userValidation.user,
           bio: 'OIEEE',
@@ -59,8 +60,8 @@ const Register = () => {
   }
 
   return (
-    <div className="bg-system-white flex h-screen items-center justify-center">
-      <div className="rounded-lg overflow-hidden relative bg-gradient-to-r from-system-orange to-orange-800 h-[80vh] w-[800px] px-44 flex flex-col gap-4 items-center justify-center">
+    <div className="bg-system-black bg-register bg-cover bg-bottom bg-blend-hard-light flex h-screen items-center justify-center">
+      <div className=" overflow-hidden relative bg-gradient-to-r from-system-orange to-orange-800 h-screen w-[800px] px-44 flex flex-col gap-4 items-center justify-center">
         <div className="absolute left-2 top-2 flex flex-col gap-3 side-animation">
           {Array.from({ length: 16 }).map((_, index) => (
             <div
@@ -114,7 +115,7 @@ const Register = () => {
         />
         <button
           onClick={() => void handleSubmit()}
-          className="bg-system-blue px-16 py-5 mt-7 h-[54px] rounded-2xl text-white font-title font-semibold"
+          className="bg-system-blue px-16 mt-7 h-[54px] rounded-2xl text-white font-title font-semibold"
         >
           REGISTRAR
         </button>
