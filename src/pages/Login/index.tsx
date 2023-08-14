@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Input from '../../components/Input'
 import { verifyPassword } from '../../utils/auth'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const LoginPage = () => {
   const [user, setUser] = useState('')
@@ -12,21 +13,14 @@ const LoginPage = () => {
 
   async function handleLogin(username: string, password: string) {
     try {
-      const response = {
-        username: '@altair',
-        password:
-          '$2a$12$2pZ2VkAdvB4MSDkV9tH/mugdmQTHqKru5Tz1R1oUtlI2TDR9iqsxW',
-        age: 12,
-        name: 'altair',
-        bio: 'OIEEE',
-      }
-
-      console.log(password)
-      console.log(await verifyPassword(password, response.password))
-
-      if (await verifyPassword(password, response.password)) {
-        setLogado(true)
-      }
+      await axios
+        .post('http://localhost:8080/auth/login', {
+          username,
+          password,
+        })
+        .then(response => {
+          console.log(response)
+        })
     } catch (error) {
       console.log(error)
     }

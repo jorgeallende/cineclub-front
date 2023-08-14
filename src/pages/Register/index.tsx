@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { BsFillArrowLeftCircleFill } from 'react-icons/bs'
 import './styles.css'
 import { useNavigate } from 'react-router-dom'
@@ -6,9 +6,12 @@ import Input from '../../components/Input'
 import { z } from 'zod'
 import axios from 'axios'
 import { hashPassword } from '../../utils/auth'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const Register = () => {
   const [user, setUser] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
   const [day, setDay] = useState(-1)
@@ -19,9 +22,20 @@ const Register = () => {
 
   const userSchema = z
     .object({
-      user: z.string().min(3).max(20),
-      password: z.string().min(6).max(20),
+      user: z
+        .string()
+        .min(3, {
+          message: 'Nome de usuário precisa ser maior que 3 caracteres.',
+        })
+        .max(20, {
+          message: 'Nome de usuário precisa ser menor que 20 caracteres.',
+        }),
+      password: z
+        .string()
+        .min(6, { message: 'Senha precisa ser maior que 6 caracteres.' })
+        .max(20, { message: 'Senha precisa ser menor que 20 caracteres' }),
       passwordConfirmation: z.string().min(6).max(20),
+      email: z.string().email({ message: 'Insira um email válido.' }),
     })
     .superRefine(({ password, passwordConfirmation }, ctx) => {
       if (password !== passwordConfirmation) {
@@ -39,28 +53,82 @@ const Register = () => {
         user,
         password,
         passwordConfirmation,
+        email,
       })
 
-      console.log(userValidation)
+      const birthday = new Date(year, month, day)
+      const age = Math.floor(
+        (new Date().getTime() - birthday.getTime()) / 31556952000,
+      )
+
+      console.log(age)
 
       await axios
-        .post('http://localhost:8080/user', {
+        .post('http://localhost:8080/user/register', {
           username: '@' + userValidation.user,
+          email: userValidation.email,
           password: await hashPassword(userValidation.password),
           age: 12,
           name: userValidation.user,
-          bio: 'OIEEE',
+          bio: '',
         })
         .then(response => {
-          console.log(response)
+          toast.success('Usuário criado com sucesso!', {
+            position: 'bottom-center',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'dark',
+          })
+
+          setTimeout(() => {
+            navigate('/login')
+          }, 3000)
         })
     } catch (error) {
-      console.log(error)
+      if (error instanceof z.ZodError) {
+        toast.warn(error.errors[0].message, {
+          position: 'bottom-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'dark',
+        })
+      } else {
+        toast.error('Erro ao criar usuário', {
+          position: 'bottom-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'dark',
+        })
+      }
     }
   }
 
   return (
     <div className="bg-system-black bg-register bg-cover bg-bottom bg-blend-hard-light flex h-screen items-center justify-center">
+      <ToastContainer
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div className=" overflow-hidden relative bg-gradient-to-r from-system-orange to-orange-800 h-screen w-[800px] px-44 flex flex-col gap-4 items-center justify-center">
         <div className="absolute left-2 top-2 flex flex-col gap-3 side-animation">
           {Array.from({ length: 16 }).map((_, index) => (
@@ -85,6 +153,13 @@ const Register = () => {
           inputValue={user}
           inputCallback={setUser}
           label="Usuário"
+          type="text"
+          variant="default"
+        />
+        <Input
+          inputValue={email}
+          inputCallback={setEmail}
+          label="Email"
           type="text"
           variant="default"
         />
