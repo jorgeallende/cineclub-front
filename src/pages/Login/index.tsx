@@ -131,14 +131,14 @@ const LoginPage = () => {
             Entrar
           </button>
           <div className="text-center">
-            <p className="underline text-blue-500 cursor-pointer">
+            <p className="underline text-blue-500 cursor-pointer hover:text-system-orange-light transition ease-in-out duration-150">
               Esqueci minha senha
             </p>
             <p>
               Não faz parte do clube?{' '}
               <span
                 onClick={() => navigate('/register')}
-                className="underline text-blue-500 cursor-pointer"
+                className="underline text-blue-500 cursor-pointer hover:text-system-orange-light transition ease-in-out duration-150"
               >
                 Criar conta
               </span>
