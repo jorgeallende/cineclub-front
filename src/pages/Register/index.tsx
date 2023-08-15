@@ -206,7 +206,8 @@ const Register = () => {
         />
         <button
           onClick={() => void handleSubmit()}
-          className="bg-system-blue px-16 mt-7 h-[54px] rounded-2xl text-white font-title font-semibold disabled:opacity-50 disabled:cursor-not-allowed hover:bg-system-orange-light shadow-lg hover:shadow-md focus:shadow-none"
+          className="bg-system-blue px-16 mt-7 h-[54px] rounded-2xl text-white font-title font-semibold disabled:opacity-50 disabled:cursor-not-allowed 
+                      transition ease-in-out duration-200 hover:bg-system-orange-light shadow-lg hover:shadow-md focus:shadow-none"
           disabled={loadingSubmit}
         >
           REGISTRAR
