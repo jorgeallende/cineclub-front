@@ -3,7 +3,7 @@ import { InputProps } from './types'
 const Input = (props: InputProps) => {
   return (
     <div className="flex flex-col gap-1 w-full">
-      <label className="text-white font-title text-sm font-semibold">
+      <label className="text-white font-title text-xs font-semibold">
         {props.label}
       </label>
       {props.variant == undefined ||

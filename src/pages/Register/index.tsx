@@ -3,13 +3,14 @@ import { BsFillArrowLeftCircleFill } from 'react-icons/bs'
 import './styles.css'
 import { useNavigate } from 'react-router-dom'
 import Input from '../../components/Input'
-import { z } from 'zod'
+import { set, z } from 'zod'
 import axios from 'axios'
-import { hashPassword } from '../../utils/auth'
+import Cookies from 'js-cookie'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 const Register = () => {
+  const [name, setName] = useState('')
   const [user, setUser] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -17,18 +18,23 @@ const Register = () => {
   const [day, setDay] = useState(-1)
   const [month, setMonth] = useState(-1)
   const [year, setYear] = useState(-1)
+  const [loadingSubmit, setLoadingSubmit] = useState(false)
 
   const navigate = useNavigate()
 
   const userSchema = z
     .object({
+      name: z
+        .string()
+        .min(3, { message: 'Usuário precisa ser maior que 3 caracteres.' })
+        .max(50, { message: 'Usuário precisa ser menor que 50 caracteres.' }),
       user: z
         .string()
         .min(3, {
-          message: 'Nome de usuário precisa ser maior que 3 caracteres.',
+          message: 'Usuário precisa ser maior que 3 caracteres.',
         })
         .max(20, {
-          message: 'Nome de usuário precisa ser menor que 20 caracteres.',
+          message: 'Usuário precisa ser menor que 20 caracteres.',
         }),
       password: z
         .string()
@@ -48,8 +54,10 @@ const Register = () => {
     })
 
   const handleSubmit = async () => {
+    setLoadingSubmit(true)
     try {
       const userValidation = userSchema.parse({
+        name,
         user,
         password,
         passwordConfirmation,
@@ -65,11 +73,11 @@ const Register = () => {
 
       await axios
         .post('http://localhost:8080/user/register', {
-          username: '@' + userValidation.user,
+          username: '@' + userValidation.user.toLowerCase(),
           email: userValidation.email,
-          password: await hashPassword(userValidation.password),
-          age: 12,
-          name: userValidation.user,
+          password: userValidation.password,
+          age: age,
+          name: userValidation.name,
           bio: '',
         })
         .then(response => {
@@ -89,6 +97,7 @@ const Register = () => {
           }, 3000)
         })
     } catch (error) {
+      setLoadingSubmit(false)
       if (error instanceof z.ZodError) {
         toast.warn(error.errors[0].message, {
           position: 'bottom-center',
@@ -150,6 +159,13 @@ const Register = () => {
           <div></div>
         </div>
         <Input
+          inputValue={name}
+          inputCallback={setName}
+          label="Nome completo"
+          type="text"
+          variant="default"
+        />
+        <Input
           inputValue={user}
           inputCallback={setUser}
           label="Usuário"
@@ -190,7 +206,8 @@ const Register = () => {
         />
         <button
           onClick={() => void handleSubmit()}
-          className="bg-system-blue px-16 mt-7 h-[54px] rounded-2xl text-white font-title font-semibold"
+          className="bg-system-blue px-16 mt-7 h-[54px] rounded-2xl text-white font-title font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+          disabled={loadingSubmit}
         >
           REGISTRAR
         </button>

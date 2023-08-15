@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import LandingPage from './pages/LandingPage'
+import LandingPage from './pages/Landing/index.tsx'
 import Register from './pages/Register'
 import LoginPage from './pages/Login'
+import Profile from './pages/Profile/index.tsx'
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: '/register',
     element: <Register />,
+  },
+  {
+    path: '/profile',
+    element: <Profile />,
   },
 ])
 
