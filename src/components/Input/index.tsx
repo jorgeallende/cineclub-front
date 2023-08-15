@@ -16,7 +16,7 @@ const Input = (props: InputProps) => {
               }
             }}
             type={props.type}
-            className="h-[54px] bg-system-white-light rounded-2xl w-full text-system-black px-4 font-title font-semibold"
+            className="h-[54px] bg-system-white-light rounded-2xl w-full text-system-black px-4 font-title font-semibold outline outline-2 outline-system-white hover:outline-system-orange hover:outline focus:outline-slate-100"
           />
         ))}
 

@@ -150,8 +150,8 @@ const Register = () => {
 
         {/*  */}
         <div className="flex justify-between w-full">
-          <button onClick={() => navigate('/')}>
-            <BsFillArrowLeftCircleFill size={26} color={''} />
+          <button onClick={() => navigate('/')} className='shadow-lg hover:shadow-sm focus:shadow-none rounded-full' >
+            <BsFillArrowLeftCircleFill size={26} color={''}  />
           </button>
           <h1 className="text-white font-title font-semibold text-xl">
             Faça parte do clube
@@ -206,7 +206,7 @@ const Register = () => {
         />
         <button
           onClick={() => void handleSubmit()}
-          className="bg-system-blue px-16 mt-7 h-[54px] rounded-2xl text-white font-title font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+          className="bg-system-blue px-16 mt-7 h-[54px] rounded-2xl text-white font-title font-semibold disabled:opacity-50 disabled:cursor-not-allowed hover:bg-system-orange-light shadow-lg hover:shadow-md focus:shadow-none"
           disabled={loadingSubmit}
         >
           REGISTRAR
