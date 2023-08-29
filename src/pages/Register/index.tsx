@@ -158,19 +158,73 @@ const Register = () => {
 
         {/*  */}
         <div className="flex justify-between w-full">
-          <button onClick={() => navigate('/')}>
-            <BsFillArrowLeftCircleFill size={26} color={''} />
+          <button onClick={() => navigate('/')} className='shadow-lg hover:shadow-sm focus:shadow-none rounded-full' >
+            <BsFillArrowLeftCircleFill size={26} color={''}  />
           </button>
           <h1 className="text-white font-title font-semibold text-xl">
             Faça parte do clube
           </h1>
           <div></div>
         </div>
+<<<<<<< HEAD
         <form
           onSubmit={e => {
             e.preventDefault()
             void handleSubmit()
           }}
+=======
+        <Input
+          inputValue={name}
+          inputCallback={setName}
+          label="Nome completo"
+          type="text"
+          variant="default"
+        />
+        <Input
+          inputValue={user}
+          inputCallback={setUser}
+          label="Usuário"
+          type="text"
+          variant="default"
+        />
+        <Input
+          inputValue={email}
+          inputCallback={setEmail}
+          label="Email"
+          type="text"
+          variant="default"
+        />
+        <Input
+          inputValue={password}
+          inputCallback={setPassword}
+          label="Senha"
+          type="password"
+          variant="default"
+        />
+        <Input
+          inputValue={passwordConfirmation}
+          inputCallback={setPasswordConfirmation}
+          label="Confirmar senha"
+          type="password"
+          variant="default"
+        />
+        <Input
+          day={day}
+          month={month}
+          year={year}
+          dayCallback={setDay as () => void}
+          monthCallback={setMonth as () => void}
+          yearCallback={setYear as () => void}
+          label="Data de nascimento"
+          type="number"
+          variant="birthday"
+        />
+        <button
+          onClick={() => void handleSubmit()}
+          className="bg-system-blue px-16 mt-7 h-[54px] rounded-2xl text-white font-title font-semibold disabled:opacity-50 disabled:cursor-not-allowed 
+                      transition ease-in-out duration-200 hover:bg-system-orange-light shadow-lg hover:shadow-md focus:shadow-none"
+          disabled={loadingSubmit}
+>>>>>>> caedb723f7ae75924528574c333bc30ba535aeef
         >
           <Input
             inputValue={name}

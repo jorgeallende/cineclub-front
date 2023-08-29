@@ -75,7 +75,7 @@ const LoginPage = () => {
   }
 
   return (
-    <div className="bg-system-white flex items-center justify-center h-screen overflow-hidden relative">
+    <div className="bg-system-white flex items-center justify-center h-screen overflow-hidden relative ">
       <ToastContainer
         position="bottom-center"
         autoClose={5000}
@@ -104,10 +104,10 @@ const LoginPage = () => {
           ></div>
         ))}
       </div>
-      <div className="bg-system-blue px-16 py-16 rounded-lg">
+      <div className="bg-system-blue px-16 py-16 rounded-lg shadow-2xl shadow-slate-600">
         <div className="w-96 min-h-[480px] flex flex-col gap-12 relative">
           <div className="absolute top-1">
-            <button onClick={() => navigate('/')}>
+            <button onClick={() => navigate('/')} className='shadow-lg hover:shadow-sm focus:shadow-none rounded-full' >
               <BsFillArrowLeftCircleFill size={26} color={''} />
             </button>
           </div>
@@ -132,7 +132,7 @@ const LoginPage = () => {
           <button
             onClick={() => void handleLogin(user.toLowerCase(), password)}
             disabled={loadingSubmit}
-            className="font-title font-semibold text-xl px-12 py-3 bg-system-orange text-white self-center rounded-full hover:bg-system-orange-light disabled:opacity-50 disabled:cursor-not-allowed"
+            className="font-title font-semibold text-xl px-12 py-3 bg-system-orange text-white self-center rounded-full hover:bg-system-orange-light disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-md focus:shadow-none"
           >
             Entrar
           </button>

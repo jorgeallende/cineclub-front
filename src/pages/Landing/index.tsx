@@ -41,14 +41,16 @@ const LandingPage = () => {
               onClick={() => {
                 navigate('/register')
               }}
-              className="px-20 py-5 bg-system-orange self-center rounded-2xl"
+              className="px-20 py-5 bg-system-orange self-center rounded-2xl 
+                          transition ease-in-out duration-200 hover:bg-system-orange-light 
+                          shadow-xl hover:shadow-md focus:shadow-none "
             >
               <span className="text-white font-title font-bold text-xl">
                 REGISTRAR
               </span>
             </button>
             <a
-              className="self-center underline text-system-black text-sm"
+              className="self-center underline text-system-black text-sm hover:text-system-orange-light transition ease-in-out duration-100"
               href="/login"
             >
               Já sou usuário →
