@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { BsFillArrowLeftCircleFill } from 'react-icons/bs'
 import './styles.css'
 import { useNavigate } from 'react-router-dom'
@@ -21,6 +21,14 @@ const Register = () => {
   const [loadingSubmit, setLoadingSubmit] = useState(false)
 
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (Cookies.get('autheticated') === 'true') {
+      setTimeout(() => {
+        navigate('/dashboard')
+      }, 1000)
+    }
+  }, [])
 
   const userSchema = z
     .object({
@@ -158,59 +166,66 @@ const Register = () => {
           </h1>
           <div></div>
         </div>
-        <Input
-          inputValue={name}
-          inputCallback={setName}
-          label="Nome completo"
-          type="text"
-          variant="default"
-        />
-        <Input
-          inputValue={user}
-          inputCallback={setUser}
-          label="Usuário"
-          type="text"
-          variant="default"
-        />
-        <Input
-          inputValue={email}
-          inputCallback={setEmail}
-          label="Email"
-          type="text"
-          variant="default"
-        />
-        <Input
-          inputValue={password}
-          inputCallback={setPassword}
-          label="Senha"
-          type="password"
-          variant="default"
-        />
-        <Input
-          inputValue={passwordConfirmation}
-          inputCallback={setPasswordConfirmation}
-          label="Confirmar senha"
-          type="password"
-          variant="default"
-        />
-        <Input
-          day={day}
-          month={month}
-          year={year}
-          dayCallback={setDay as () => void}
-          monthCallback={setMonth as () => void}
-          yearCallback={setYear as () => void}
-          label="Data de nascimento"
-          type="number"
-          variant="birthday"
-        />
-        <button
-          onClick={() => void handleSubmit()}
-          className="bg-system-blue px-16 mt-7 h-[54px] rounded-2xl text-white font-title font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
-          disabled={loadingSubmit}
+        <form
+          onSubmit={e => {
+            e.preventDefault()
+            void handleSubmit()
+          }}
         >
-          REGISTRAR
-        </button>
+          <Input
+            inputValue={name}
+            inputCallback={setName}
+            label="Nome completo"
+            type="text"
+            variant="default"
+          />
+          <Input
+            inputValue={user}
+            inputCallback={setUser}
+            label="Usuário"
+            type="text"
+            variant="default"
+          />
+          <Input
+            inputValue={email}
+            inputCallback={setEmail}
+            label="Email"
+            type="text"
+            variant="default"
+          />
+          <Input
+            inputValue={password}
+            inputCallback={setPassword}
+            label="Senha"
+            type="password"
+            variant="default"
+          />
+          <Input
+            inputValue={passwordConfirmation}
+            inputCallback={setPasswordConfirmation}
+            label="Confirmar senha"
+            type="password"
+            variant="default"
+          />
+          <Input
+            day={day}
+            month={month}
+            year={year}
+            dayCallback={setDay as () => void}
+            monthCallback={setMonth as () => void}
+            yearCallback={setYear as () => void}
+            label="Data de nascimento"
+            type="number"
+            variant="birthday"
+          />
+          <button
+            type="submit"
+            className="bg-system-blue px-16 mt-7 h-[54px] rounded-2xl text-white font-title font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={loadingSubmit}
+          >
+            REGISTRAR
+          </button>
+        </form>
         {/*  */}
 
         <div className="absolute right-2 top-2 group flex flex-col gap-3 side-animation">

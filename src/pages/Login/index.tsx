@@ -7,6 +7,10 @@ import Cookies from 'js-cookie'
 import 'react-toastify/dist/ReactToastify.css'
 import { BsFillArrowLeftCircleFill } from 'react-icons/bs'
 
+type TokenResponse = {
+  token: string
+}
+
 const LoginPage = () => {
   const [user, setUser] = useState('')
   const [password, setPassword] = useState('')
@@ -19,7 +23,7 @@ const LoginPage = () => {
     if (Cookies.get('autheticated') === 'true') {
       setLogado(true)
       setTimeout(() => {
-        navigate('/profile')
+        navigate('/dashboard')
       }, 1000)
     }
   }, [])
@@ -47,9 +51,11 @@ const LoginPage = () => {
 
           Cookies.set('autheticated', 'true', { expires: 1 })
           Cookies.set('username', username, { expires: 1 })
-          Cookies.set('token', response.data as string, { expires: 1 })
 
-          navigate('/profile')
+          const tokenResponse = response.data as TokenResponse
+          Cookies.set('token', tokenResponse.token, { expires: 1 })
+
+          navigate('/dashboard')
         })
     } catch (error) {
       console.log(error)
