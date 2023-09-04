@@ -12,7 +12,7 @@ const CarroselMoviePoster = ({
   director,
 }: CarroselMoviePosterProps) => {
   return (
-    <div className="min-w-[150px] rounded-lg mb-1">
+    <div className="min-w-[150px] rounded-lg mb-1 shadow-md">
       <div className="relative h-full">
         <img
           className="rounded-lg absolute bottom-0 min-h-full min-w-full filter brightness-50"
