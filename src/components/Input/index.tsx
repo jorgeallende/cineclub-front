@@ -2,7 +2,7 @@ import { InputProps } from './types'
 
 const Input = (props: InputProps) => {
   return (
-    <div className="flex flex-col gap-1 w-full">
+    <div className="flex flex-col gap-1 w-full mb-3">
       <label className="text-white font-title text-xs font-semibold">
         {props.label}
       </label>
