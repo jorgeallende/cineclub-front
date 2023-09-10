@@ -4,6 +4,7 @@ export type InputProps = {
   (
     | {
         variant?: 'birthday'
+        className?: string
         day: number | null
         month: number | null
         year: number | null
@@ -14,6 +15,7 @@ export type InputProps = {
     | {
         variant?: 'default'
         inputValue: string
+        className?: string
         inputCallback: (value: string) => void
       }
   )

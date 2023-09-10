@@ -7,6 +7,7 @@ import Register from './pages/Register'
 import LoginPage from './pages/Login'
 import Profile from './pages/Profile/index.tsx'
 import Dashboard from './pages/Dashboard/index.tsx'
+import NewMovie from './pages/NewMovie/index.tsx'
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: '/dashboard',
     element: <Dashboard />,
+  },
+  {
+    path: '/new-movie',
+    element: <NewMovie />,
   },
 ])
 

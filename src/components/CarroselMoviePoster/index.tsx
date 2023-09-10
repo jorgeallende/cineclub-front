@@ -15,9 +15,10 @@ const CarroselMoviePoster = ({
     <div className="min-w-[150px] rounded-lg mb-1 shadow-md">
       <div className="relative h-full">
         <img
-          className="rounded-lg absolute bottom-0 min-h-full min-w-full filter brightness-50"
+          className="rounded-lg absolute bottom-0 min-h-full min-w-full"
           src={image}
         />
+        <div className="absolute rounded-lg bg-gradient-to-b from-transparent to-black  h-full w-full overflow-hidden"></div>
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full text-center font-title">
           <h1 className="font-bold text-sm">{title}</h1>
           <span className="text-xs">
