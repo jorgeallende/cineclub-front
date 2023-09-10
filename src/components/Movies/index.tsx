@@ -22,7 +22,7 @@ const Movies = () => {
       </div>
       <span className="text-system-black text-xs">
         Não encontrou seu filme?{' '}
-        <Link to="/movie/create" className="text-blue-900">
+        <Link to="/new-movie" className="text-blue-900">
           Adicione um novo filme.
         </Link>
       </span>

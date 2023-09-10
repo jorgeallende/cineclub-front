@@ -7,6 +7,11 @@ import Register from './pages/Register'
 import LoginPage from './pages/Login'
 import Profile from './pages/Profile/index.tsx'
 import Dashboard from './pages/Dashboard/index.tsx'
+import NewMovie from './pages/NewMovie/index.tsx'
+import { ThemeProvider } from '@emotion/react'
+import { theme } from './muitheme.ts'
+
+
 
 const router = createBrowserRouter([
   {
@@ -29,10 +34,16 @@ const router = createBrowserRouter([
     path: '/dashboard',
     element: <Dashboard />,
   },
+  {
+    path: '/new-movie',
+    element: <NewMovie />,
+  },
 ])
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ThemeProvider theme={theme}>
+      <RouterProvider router={router} />
+    </ThemeProvider>
   </React.StrictMode>,
 )

@@ -16,7 +16,10 @@ const Input = (props: InputProps) => {
               }
             }}
             type={props.type}
-            className="h-10 bg-system-white-light rounded-2xl w-full text-system-black px-4 font-title font-semibold outline outline-2 outline-system-white hover:outline-system-orange hover:outline focus:outline-slate-100"
+            {...props}
+            className={`h-[40px] text-sm bg-system-white-light rounded-md w-full text-system-black px-4 font-title font-semibold outline outline-2 outline-system-white hover:outline-system-orange hover:outline focus:outline-slate-100 ${
+              props.className as string
+            }`}
           />
         ))}
 
@@ -24,6 +27,7 @@ const Input = (props: InputProps) => {
       {props.variant === 'birthday' && (
         <div className="flex justify-between gap-8">
           <input
+            {...props}
             placeholder="Dia"
             type={props.type}
             value={props.day == -1 ? '' : (props.day as number)}
@@ -40,9 +44,10 @@ const Input = (props: InputProps) => {
                 }
               }
             }}
-            className="h-10 bg-system-white-light rounded-2xl w-full text-system-black px-4 font-title font-semibold"
+            className="h-[54px] text-sm bg-system-white-light rounded-2xl w-full text-system-black px-4 font-title font-semibold"
           />
           <input
+            {...props}
             placeholder="Mês"
             type={props.type}
             value={props.month == -1 ? '' : (props.month as number)}
@@ -59,9 +64,10 @@ const Input = (props: InputProps) => {
                 }
               }
             }}
-            className="h-10 bg-system-white-light rounded-2xl w-full text-system-black px-4 font-title font-semibold"
+            className="h-[54px] text-sm bg-system-white-light rounded-2xl w-full text-system-black px-4 font-title font-semibold"
           />
           <input
+            {...props}
             placeholder="Ano"
             type={props.type}
             value={props.year == -1 ? '' : (props.year as number)}
@@ -78,7 +84,7 @@ const Input = (props: InputProps) => {
                 }
               }
             }}
-            className="h-10 bg-system-white-light rounded-2xl w-full text-system-black px-4 font-title font-semibold"
+            className="h-[54px] text-sm bg-system-white-light rounded-2xl w-full text-system-black px-4 font-title font-semibold"
           />
         </div>
       )}

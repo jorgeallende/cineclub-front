@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { BsFillArrowLeftCircleFill } from 'react-icons/bs'
 import './styles.css'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Input from '../../components/Input'
 import { set, z } from 'zod'
 import axios from 'axios'
@@ -231,6 +231,12 @@ const Register = () => {
             {loadingSubmit ? 'Carregando...' : 'Cadastrar'}
           </button>
         </form>
+        <Link
+          className="self-center underline text-system-black text-sm hover:text-white transition ease-in-out duration-100"
+          to="/login"
+        >
+          Já sou usuário →
+        </Link>
         {/*  */}
 
         <div className="absolute right-2 top-2 group flex flex-col gap-3 side-animation">

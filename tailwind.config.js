@@ -12,6 +12,7 @@ export default {
         "system-blue": "#264653",
         "system-orange-gradient": "linear-gradient(90deg, #E76F51 0%, #9D351B 99.99%, #E76F51 100%)",
         "system-dark-gray": "#8A8A8A",
+        "system-black-gradient": "linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)"
       },
       fontFamily: {
         "system": ["Inter", "sans-serif"],
