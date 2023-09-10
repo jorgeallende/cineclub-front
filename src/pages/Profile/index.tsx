@@ -28,6 +28,14 @@ function Profile() {
     navigate('/')
   }
 
+  useEffect(() => {
+    const token = Cookies.get('token')
+    if (!token) {
+      navigate('/')
+    }
+    getUserInfo(username)
+  }, [username])
+
   return (
     <div className="flex justify-center">
       <div className="bg-system-blue mt-16 px-16 py-16 rounded-lg shadow-2xl shadow-slate-600">
