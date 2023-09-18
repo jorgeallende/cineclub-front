@@ -4,6 +4,7 @@ import { IoMdNotifications } from 'react-icons/io'
 import { BsFillGearFill } from 'react-icons/bs'
 import { BiLogOut } from 'react-icons/bi'
 import { Screens } from '../../types/types'
+import { FaLayerGroup } from 'react-icons/fa'
 
 interface NavbarProps {
   username: string
@@ -71,6 +72,15 @@ const Navbar = ({
           >
             <BsFillGearFill className="text-system-blue" size={24} />
             <span>Configurações</span>
+          </button>
+          <button
+            onClick={() => changeScreen('clubs')}
+            className={`${
+              currentScreen == 'clubs' ? 'bg-neutral-600 bg-opacity-25' : ''
+            } rounded-full flex items-center w-full py-2 hover:bg-opacity-25 px-4 text-zinc-700 gap-4 hover:bg-neutral-600 transition ease-in-out duration-200`}
+          >
+            <FaLayerGroup className="text-system-blue" size={24} />
+            <span>Clubes</span>
           </button>
           <button
             onClick={() => handleLogout()}

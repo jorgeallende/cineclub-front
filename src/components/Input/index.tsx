@@ -3,7 +3,7 @@ import { InputProps } from './types'
 const Input = (props: InputProps) => {
   return (
     <div className="flex flex-col gap-1 w-full mb-3">
-      <label className="text-white font-title text-sm mb-1 font-semibold">
+      <label className="text-white font-title text-sm mb-1 font-normal">
         {props.label}
       </label>
       {props.variant == undefined ||
@@ -17,7 +17,7 @@ const Input = (props: InputProps) => {
             }}
             type={props.type}
             {...props}
-            className={`h-[40px] text-sm bg-system-white-light rounded-md w-full text-system-black px-4 font-title font-semibold outline outline-2 outline-system-white hover:outline-system-orange hover:outline focus:outline-slate-100 ${
+            className={`h-[40px] text-sm bg-system-white-light rounded-md w-full text-system-black px-4 font-title font-normal outline outline-2 outline-system-white hover:outline-system-orange hover:outline focus:outline-slate-100 ${
               props.className as string
             }`}
           />
@@ -44,7 +44,7 @@ const Input = (props: InputProps) => {
                 }
               }
             }}
-            className="h-[54px] text-sm bg-system-white-light rounded-2xl w-full text-system-black px-4 font-title font-semibold"
+            className="h-[40px] text-sm bg-system-white-light rounded-md w-full text-system-black px-4 font-title font-normal"
           />
           <input
             {...props}
@@ -64,7 +64,7 @@ const Input = (props: InputProps) => {
                 }
               }
             }}
-            className="h-[54px] text-sm bg-system-white-light rounded-2xl w-full text-system-black px-4 font-title font-semibold"
+            className="h-[40px] text-sm bg-system-white-light rounded-md w-full text-system-black px-4 font-title font-normal"
           />
           <input
             {...props}
@@ -84,7 +84,7 @@ const Input = (props: InputProps) => {
                 }
               }
             }}
-            className="h-[54px] text-sm bg-system-white-light rounded-2xl w-full text-system-black px-4 font-title font-semibold"
+            className="h-[40px] text-sm bg-system-white-light rounded-md w-full text-system-black px-4 font-title font-normal"
           />
         </div>
       )}

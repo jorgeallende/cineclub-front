@@ -15,4 +15,4 @@ export type UserByUsername = {
   username: string
 }
 
-export type Screens = 'home' | 'profile' | 'movies' | 'settings'
+export type Screens = 'home' | 'profile' | 'movies' | 'settings' | 'clubs'

@@ -7,6 +7,7 @@ import { Screens, UserByUsername } from '../../types/types.ts'
 import Navbar from '../../components/Navbar/index.tsx'
 import FeedAndPopular from '../../components/FeedAndPopular.tsx/index.tsx'
 import Movies from '../../components/Movies/index.tsx'
+import Clubs from '../../components/Clubs/index.tsx'
 
 const Dashboard = () => {
   const username = Cookies.get('username')
@@ -62,6 +63,7 @@ const Dashboard = () => {
       {currentScreen == 'profile' && <h1>profile</h1>}
       {currentScreen == 'movies' && <Movies />}
       {currentScreen == 'settings' && <h1>settings</h1>}
+      {currentScreen == 'clubs' && <Clubs />}
     </div>
   )
 }

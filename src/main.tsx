@@ -10,8 +10,7 @@ import Dashboard from './pages/Dashboard/index.tsx'
 import NewMovie from './pages/NewMovie/index.tsx'
 import { ThemeProvider } from '@emotion/react'
 import { theme } from './muitheme.ts'
-
-
+import NewClub from './pages/NewClub/index.tsx'
 
 const router = createBrowserRouter([
   {
@@ -37,6 +36,10 @@ const router = createBrowserRouter([
   {
     path: '/new-movie',
     element: <NewMovie />,
+  },
+  {
+    path: '/new-club',
+    element: <NewClub />,
   },
 ])
 
