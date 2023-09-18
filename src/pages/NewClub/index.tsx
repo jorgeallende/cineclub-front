@@ -3,7 +3,7 @@ import ProfilePicture from '../../assets/profile_pic.jpg'
 import { useNavigate } from 'react-router-dom'
 import Input from '../../components/Input'
 import { useState, useEffect } from 'react'
-import { z } from 'zod'
+import { set, z } from 'zod'
 import axios from 'axios'
 import { ToastContainer } from 'react-toastify'
 import Cookies from 'js-cookie'
@@ -17,6 +17,7 @@ const NewClub = () => {
   const token = Cookies.get('token')
 
   const [nome, setNome] = useState('')
+  const [thisUser, setThisUser] = useState<UserByUsername>({} as UserByUsername)
   const [userToBeAdded, setUserToBeAdded] = useState({})
   const [usernameToBeAdded, setUsernameToBeAdded] = useState('')
   const [userList, setUserList] = useState<UserByUsername[]>([])
@@ -28,8 +29,8 @@ const NewClub = () => {
           `http://localhost:8080/user/username/${usernameToBeAdded}`,
         )
         .then(response => {
-          setUserToBeAdded(response.data)
-          console.log(response.data)
+          console.log('RESPONSE.DATA: ', response.data)
+          console.log('USER TO BE ADDED: ', userList)
           setUserList([...userList, response.data])
           setLoadingSubmit(false)
         })
@@ -43,7 +44,7 @@ const NewClub = () => {
       try {
         await axios
           .get<UserByUsername>(
-            `http://localhost:8080/user/username/${username}`,
+            `http://localhost:8080/user/username/@${username}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -52,7 +53,8 @@ const NewClub = () => {
           )
           .then(response => {
             setNome(response.data.name)
-            console.log(response)
+            setThisUser(response.data)
+            console.log('THIS USER', response)
           })
       } catch (error) {
         console.error(error)
@@ -64,8 +66,32 @@ const NewClub = () => {
     void getUserInfos()
   }, [username, token])
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    console.log(nome)
     setLoadingSubmit(true)
+    try {
+      await axios
+        .post(
+          'http://localhost:8080/club/create',
+          {
+            name: title,
+            admUser: thisUser,
+            users: userList,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token as string}`,
+            },
+          },
+        )
+        .then(response => {
+          console.log(response)
+          setLoadingSubmit(false)
+          navigate('/dashboard')
+        })
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (
@@ -136,6 +162,7 @@ const NewClub = () => {
                   onClick={() => {
                     void getUserByUsername()
                   }}
+                  type="button"
                   className="font-semibold text-xl px-12 py-2 bg-system-blue text-white mt-4 rounded-md hover:bg-system-blue hover:bg-opacity-80 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-md focus:shadow-none"
                 >
                   Adicionar
@@ -155,13 +182,16 @@ const NewClub = () => {
 
                 {userList.length > 0 &&
                   userList.map((user, index) => (
-                    <div className="bg-system-blue p-3 rounded-full flex gap-2 cursor-pointer">
+                    <div
+                      key={user.id}
+                      className="bg-system-blue p-3 rounded-full flex gap-2 cursor-pointer"
+                    >
                       <div className="w-12 h-12 rounded-full bg-neutral-400 overflow-hidden">
-                        <img src={ProfilePicture} alt="" />
+                        <img alt="" />
                       </div>
                       <div className="flex flex-col text-sm justify-center">
                         <strong>MEMBRO</strong>
-                        <span>@{username}</span>
+                        <span>{user.username}</span>
                       </div>
                     </div>
                   ))}

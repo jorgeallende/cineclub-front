@@ -46,7 +46,7 @@ const Navbar = ({
             <IoMdNotifications className="text-system-blue" size={24} />
             <span>Home</span>
           </button>
-          <button
+          {/* <button
             onClick={() => changeScreen('profile')}
             className={`${
               currentScreen == 'profile' ? 'bg-neutral-600 bg-opacity-25' : ''
@@ -54,7 +54,7 @@ const Navbar = ({
           >
             <AiOutlineUser className="text-system-blue" size={24} />
             <span>Meu perfil</span>
-          </button>
+          </button> */}
           <button
             onClick={() => changeScreen('movies')}
             className={`${
@@ -64,7 +64,7 @@ const Navbar = ({
             <AiOutlineUnorderedList className="text-system-blue" size={24} />
             <span>Filmes</span>
           </button>
-          <button
+          {/* <button
             onClick={() => changeScreen('settings')}
             className={`${
               currentScreen == 'settings' ? 'bg-neutral-600 bg-opacity-25' : ''
@@ -72,7 +72,7 @@ const Navbar = ({
           >
             <BsFillGearFill className="text-system-blue" size={24} />
             <span>Configurações</span>
-          </button>
+          </button> */}
           <button
             onClick={() => changeScreen('clubs')}
             className={`${
