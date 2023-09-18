@@ -22,7 +22,7 @@ const Navbar = ({
   changeScreen,
 }: NavbarProps) => {
   return (
-    <nav className="flex flex-col gap-2 min-w-[360px]">
+    <nav className="flex flex-col gap-2 min-w-[360px] overflow-y-scroll">
       <div className="rounded-lg flex flex-col gap-2 p-4 justify-around bg-opacity-25">
         {/* User bullet */}
         <div className="bg-system-orange p-3 rounded-full flex gap-2 cursor-pointer">

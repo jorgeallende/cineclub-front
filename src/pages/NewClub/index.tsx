@@ -19,6 +19,7 @@ const NewClub = () => {
   const [nome, setNome] = useState('')
   const [userToBeAdded, setUserToBeAdded] = useState({})
   const [usernameToBeAdded, setUsernameToBeAdded] = useState('')
+  const [userList, setUserList] = useState<UserByUsername[]>([])
 
   async function getUserByUsername() {
     try {
@@ -29,6 +30,7 @@ const NewClub = () => {
         .then(response => {
           setUserToBeAdded(response.data)
           console.log(response.data)
+          setUserList([...userList, response.data])
           setLoadingSubmit(false)
         })
     } catch (error) {
@@ -92,8 +94,8 @@ const NewClub = () => {
         />
 
         {/*  */}
-        <div className=" w-full py-6 h-full flex flex-col gap-2">
-          <div className="flex justify-between">
+        <div className=" w-full py-6 h-full overflow-y-scroll flex flex-col gap-2">
+          <div className=" flex justify-between">
             <button
               onClick={() => navigate('/dashboard')}
               className="shadow-lg hover:shadow-sm focus:shadow-none rounded-full"
@@ -140,7 +142,7 @@ const NewClub = () => {
                 </button>
               </div>
 
-              <div>
+              <div className="flex flex-col gap-3">
                 <div className="bg-system-orange p-3 rounded-full flex gap-2 cursor-pointer">
                   <div className="w-12 h-12 rounded-full bg-neutral-400 overflow-hidden">
                     <img src={ProfilePicture} alt="" />
@@ -150,6 +152,19 @@ const NewClub = () => {
                     <span>@{username}</span>
                   </div>
                 </div>
+
+                {userList.length > 0 &&
+                  userList.map((user, index) => (
+                    <div className="bg-system-blue p-3 rounded-full flex gap-2 cursor-pointer">
+                      <div className="w-12 h-12 rounded-full bg-neutral-400 overflow-hidden">
+                        <img src={ProfilePicture} alt="" />
+                      </div>
+                      <div className="flex flex-col text-sm justify-center">
+                        <strong>MEMBRO</strong>
+                        <span>@{username}</span>
+                      </div>
+                    </div>
+                  ))}
               </div>
 
               <button
