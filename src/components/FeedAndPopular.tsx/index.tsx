@@ -8,7 +8,10 @@ const FeedAndPopular = () => {
   return (
     <main className="flex flex-col gap-2 overflow-x-hidden">
       <section className=" rounded-lg flex-1 px-3 py-6 bg-opacity-25 min-h-[300px]">
-        <div className="flex w-full justify-between gap-2 h-full overflow-x-scroll overflow-y-hidden">
+        <p className="font-title font-bold text-system-black">
+          Filmes populares entre clubes
+        </p>
+        <div className="flex w-full justify-between gap-2 h-full overflow-x-scroll overflow-y-hidden mt-1">
           {slicedMovieList.map((movie: Movie) => {
             return (
               <CarroselMoviePoster
@@ -22,9 +25,7 @@ const FeedAndPopular = () => {
           })}
         </div>
       </section>
-      <section className="bg-system-dark-gray rounded-lg p-4 h-2/3 bg-opacity-25">
-        Atividade recente
-      </section>
+      <section className="bg-system-dark-gray rounded-lg p-4 h-2/3 bg-opacity-25 ml-3"></section>
     </main>
   )
 }

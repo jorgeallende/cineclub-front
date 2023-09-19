@@ -37,12 +37,14 @@ const Movies = () => {
 
   const searchMovies = async (input: string) => {
     const response = await axios
-      .get<MovieFromDb[]>('http://localhost:8080/movie/search', {
+      .post<MovieFromDb[]>('http://localhost:8080/movie/search', {
+        movieName: input,
         headers: {
           Authorization: `Bearer ${token!}`,
         },
       })
       .then(response => {
+        setResultSearch(response.data)
         console.log('MID pesquisa', response.data)
         setSearchMode(true)
       })
@@ -128,7 +130,6 @@ const Movies = () => {
           <h1 className="text-xl font-bold text-system-blue">Comédia</h1>
           <div className="mt-2 flex w-full gap-2 min-h-[250px] h-full overflow-x-scroll overflow-y-hidden">
             {moviesDb.map((movie: MovieFromDb) => {
-              console.log(movie.genres)
               if (movie.genres.includes('COMEDY')) {
                 return (
                   <CarroselMoviePoster
@@ -147,7 +148,6 @@ const Movies = () => {
           <h1 className="text-xl font-bold text-system-blue">Terror</h1>
           <div className="mt-2 flex w-full gap-2 min-h-[250px] h-full overflow-x-scroll overflow-y-hidden">
             {moviesDb.map((movie: MovieFromDb) => {
-              console.log(movie.genres)
               if (
                 movie.genres.includes('HORROR') ||
                 movie.genres.includes('THRILLER')
@@ -169,7 +169,6 @@ const Movies = () => {
           <h1 className="text-xl font-bold text-system-blue">Drama</h1>
           <div className="mt-2 flex w-full justify-between gap-2 min-h-[250px] h-full overflow-x-scroll overflow-y-hidden">
             {moviesDb.map((movie: MovieFromDb) => {
-              console.log(movie.genres)
               if (movie.genres.includes('DRAMA')) {
                 return (
                   <CarroselMoviePoster
@@ -188,7 +187,6 @@ const Movies = () => {
           <h1 className="text-xl font-bold text-system-blue">Ação</h1>
           <div className="mt-2 flex w-full justify-between gap-2 min-h-[250px] h-full overflow-x-scroll overflow-y-hidden">
             {moviesDb.map((movie: MovieFromDb) => {
-              console.log(movie.genres)
               if (movie.genres.includes('ACTION')) {
                 return (
                   <CarroselMoviePoster

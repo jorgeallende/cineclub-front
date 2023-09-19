@@ -175,7 +175,7 @@ const NewClub = () => {
                     <img src={ProfilePicture} alt="" />
                   </div>
                   <div className="flex flex-col text-sm justify-center">
-                    <strong>ADMINITRADOR</strong>
+                    <strong>ADMINISTRADOR</strong>
                     <span>@{username}</span>
                   </div>
                 </div>

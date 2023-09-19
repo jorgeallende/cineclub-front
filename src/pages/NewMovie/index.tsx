@@ -55,6 +55,30 @@ const NewMovie = () => {
     'FILM_NOIR',
   ]
 
+  const genreListPortuguese = [
+    'Animação',
+    'Musical',
+    'Fantasia',
+    'Drama',
+    'Guerra',
+    'Ficção Científica',
+    'Terror',
+    'Aventura',
+    'Crime',
+    'Biografia',
+    'Esporte',
+    'Ação',
+    'Suspense',
+    'Comédia',
+    'Mistério',
+    'Família',
+    'Musical',
+    'Faroeste',
+    'História',
+    'Romance',
+    'Film Noir',
+  ]
+
   const movieSchema = z.object({
     name: z
       .string()
@@ -269,10 +293,11 @@ const NewMovie = () => {
                   renderValue={selected => selected.join(', ')}
                   disabled={loadingSubmit}
                 >
-                  {genresList.map(genre => (
-                    <MenuItem key={genre} value={genre}>
+                  {/* Genrelist with label in portuguese */}
+                  {genresList.map((genre, index) => (
+                    <MenuItem key={index} value={genre}>
                       <Checkbox checked={genres.indexOf(genre) > -1} />
-                      <ListItemText primary={genre} />
+                      <ListItemText primary={genreListPortuguese[index]} />
                     </MenuItem>
                   ))}
                 </Select>
